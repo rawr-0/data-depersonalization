@@ -21,7 +21,7 @@ struct line{
         this-> choice = choice;
     }
 
-    line(int choice){num = 0;this->choice = choice;}
+    line(int choice){num = 1000000;this->choice = choice;}
 
     string to_string(){
         if(choice == 0)
@@ -94,26 +94,27 @@ void calculation(){
     for(int i = 0;i<lines.size();i++){
         if(lines[i].num == 0)
             cout<<lines[i].to_string()<<endl;
-        if(line1.num <= lines[i].num)
+        if(line1.num >= lines[i].num)
             line5 = line4, line4 = line3, line3 = line2, line2 = line1, line1 = lines[i];
         else
-            if(line2.num <= lines[i].num)
+            if(line2.num >= lines[i].num)
                 line5 = line4, line4 = line3, line3 = line2, line2 = lines[i];
             else
-                if(line3.num <= lines[i].num)
+                if(line3.num >= lines[i].num)
                     line5 = line4, line4 = line3, line3 = lines[i];
                 else
-                if(line4.num <= lines[i].num)
+                if(line4.num >= lines[i].num)
                     line5 = line4, line4 = lines[i];
                 else
-                if(line5.num <= lines[i].num)
+                if(line5.num >= lines[i].num)
                     line5 = lines[i];
     }
     cout<<"конец уникальных строк ^^^"<<endl<<endl;
 
-    cout<<line1.num+1<<" -k  "<<double(line1.num+1)/num<<" - % "<<line1.to_string()<<endl
-            <<line2.num+1<<" -k  "<<double(line2.num+1)/num<<" - % "<<line2.to_string()<<endl
-            <<line3.num+1<<" -k  "<<double(line3.num+1)/num<<" - % "<<line3.to_string()<<endl
-            <<line4.num+1<<" -k  "<<double(line4.num+1)/num<<" - % "<<line4.to_string()<<endl
-            <<line5.num+1<<" -k  "<<double(line5.num+1)/num<<" - % "<<line5.to_string()<<endl;
+    cout<<line1.num+1<<"-k  "<<(double(line1.num+1)/num*100)<<"%  "<<line1.to_string()<<endl
+            <<line2.num+1<<"-k  "<<(double(line2.num+1)/num*100)<<"%  "<<line2.to_string()<<endl
+            <<line3.num+1<<"-k  "<<(double(line3.num+1)/num*100)<<"%  "<<line3.to_string()<<endl
+            <<line4.num+1<<"-k  "<<(double(line4.num+1)/num*100)<<"%  "<<line4.to_string()<<endl
+            <<line5.num+1<<"-k  "<<(double(line5.num+1)/num)*100<<"%  "<<line5.to_string()<<endl;
+
 }

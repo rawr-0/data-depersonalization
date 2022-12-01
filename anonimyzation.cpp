@@ -19,6 +19,20 @@ vector<string> split(string line){
     return spliter;
 }
 
+string datec(string date){
+    string s;
+    int q = 0;
+    int u = 0;
+    for(int i = date.size()-1;date[i] != 'T';i--,q++){}
+    for(int i = 0;i<date.size();i++){
+        if(u>1 and i < date.size()-q)
+            s+=date[i];
+        if(date[i] == '.' and u <= 1)
+            u++;
+    }
+    return "*"+s;
+}
+
 void anonymization(){
     ifstream in("../table.csv");
     ofstream out("../table_out.csv");
@@ -33,8 +47,8 @@ void anonymization(){
         if(!s.empty()) {
             line = split(s);
             if(!line[0].empty())
-            out << "*****;" << "*****;" << "*****;" << "РФ"<<";"<< line[4] << ";" << line[5] << ";" << line[6] << ";"
-                << line[7] << ";" << line[8] << ";" << line[9][0]<<";" << ((stoi(line[10]) > 3000) ? "3000-25000" : (stoi(line[10]) > 2000) ? "2000-3000"
+            out << "*****;" << "*****;" << "*****;" << "РФ"<<";"<< line[4] << ";" << line[5] << ";" << datec(line[6]) << ";"
+                << datec(line[7]) << ";" << "*" << ";" << "*" <<";" << ((stoi(line[10]) > 3000) ? ">2000" : (stoi(line[10]) > 2000) ? ">2000"
                 : (stoi(line[10]) > 1000) ? "1000-2000" : (stoi(line[10]) > 0) ? "0-1000" : "er")<<";"<< line[11][0] <<"*********"<<endl;
         }
     }
